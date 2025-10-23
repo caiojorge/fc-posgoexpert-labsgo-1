@@ -1,0 +1,65 @@
+basePath: /
+definitions:
+  domain.Temperature:
+    properties:
+      temp_C:
+        type: number
+      temp_F:
+        type: number
+      temp_K:
+        type: number
+    type: object
+  http.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@weather-api.com
+    name: API Support
+  description: API para consulta de temperatura por CEP
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: Weather API
+  version: "1.0"
+paths:
+  /weather/{zipcode}:
+    get:
+      consumes:
+      - application/json
+      description: Retorna a temperatura atual em Celsius, Fahrenheit e Kelvin para
+        um CEP brasileiro
+      parameters:
+      - description: CEP brasileiro (8 dígitos)
+        example: 01310-100
+        in: path
+        name: zipcode
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Temperatura atual
+          schema:
+            $ref: '#/definitions/domain.Temperature'
+        "404":
+          description: CEP não encontrado
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "422":
+          description: CEP inválido
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+        "500":
+          description: Erro interno do servidor
+          schema:
+            $ref: '#/definitions/http.ErrorResponse'
+      summary: Obter temperatura por CEP
+      tags:
+      - weather
+swagger: "2.0"
