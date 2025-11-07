@@ -8,6 +8,7 @@ import (
 	httpAdapter "github.com/caio/weather-api/adapter/http"
 	_ "github.com/caio/weather-api/docs"
 	"github.com/caio/weather-api/usecase"
+	"github.com/joho/godotenv"
 )
 
 // @title Weather API
@@ -22,6 +23,9 @@ import (
 // @BasePath /
 
 func main() {
+	// Load .env file if it exists (ignore error in production where env vars may be set differently)
+	_ = godotenv.Load()
+
 	weatherAPIKey := os.Getenv("WEATHER_API_KEY")
 	if weatherAPIKey == "" {
 		log.Fatal("WEATHER_API_KEY environment variable is required")
