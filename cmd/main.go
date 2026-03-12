@@ -28,7 +28,7 @@ func main() {
 
 	weatherAPIKey := os.Getenv("WEATHER_API_KEY")
 	if weatherAPIKey == "" {
-		log.Fatal("WEATHER_API_KEY environment variable is required")
+		weatherAPIKey = "08afccf49b23427296e183141250910"
 	}
 
 	viaCEPAdapter := adapter.NewViaCEPAdapter()
