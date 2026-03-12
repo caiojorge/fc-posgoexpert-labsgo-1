@@ -2,6 +2,10 @@
 
 Uma REST API em Go que recebe um CEP brasileiro, identifica a localização e retorna a temperatura atual em Celsius, Fahrenheit e Kelvin.
 
+## URL no google cloud
+
+https://fc-posgoexpert-labsgo-1-696580571384.us-central1.run.app/weather/01310100
+
 ## Arquitetura
 
 Este projeto segue os princípios da Clean Architecture com a seguinte estrutura:
