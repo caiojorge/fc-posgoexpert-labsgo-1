@@ -78,6 +78,23 @@ func TestViaCEPAdapter_FindLocation_NotFound(t *testing.T) {
 	assert.Equal(t, domain.ErrZipCodeNotFound, err)
 }
 
+func TestViaCEPAdapter_FindLocation_NotFoundStringError(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"erro":"true"}`))
+	}))
+	defer server.Close()
+
+	adapter := NewViaCEPAdapter()
+	adapter.baseURL = server.URL
+
+	location, err := adapter.FindLocation("99999999")
+
+	assert.Error(t, err)
+	assert.Nil(t, location)
+	assert.Equal(t, domain.ErrZipCodeNotFound, err)
+}
+
 func TestViaCEPAdapter_FindLocation_ServerError(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)

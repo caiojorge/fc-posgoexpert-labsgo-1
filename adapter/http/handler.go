@@ -2,6 +2,7 @@ package http
 
 import (
 	"errors"
+	"log"
 	"net/http"
 	"regexp"
 
@@ -48,6 +49,7 @@ func (h *WeatherHandler) GetWeatherByZipCode(c *gin.Context) {
 
 	temperature, err := h.getWeatherUseCase.Execute(zipCode)
 	if err != nil {
+		log.Printf("Error executing use case: %v", err)
 		if errors.Is(err, domain.ErrInvalidZipCode) {
 			c.JSON(http.StatusUnprocessableEntity, ErrorResponse{
 				Message: "invalid zipcode",
