@@ -4,9 +4,11 @@ Uma REST API em Go que recebe um CEP brasileiro, identifica a localização e re
 
 ## URL no google cloud
 
+```
 https://fc-posgoexpert-labsgo-1-696580571384.us-central1.run.app/weather/01310100
 https://fc-posgoexpert-labsgo-1-696580571384.us-central1.run.app/weather/99999999
 https://fc-posgoexpert-labsgo-1-696580571384.us-central1.run.app/weather/123
+```
 
 ## Arquitetura
 
